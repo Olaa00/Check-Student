@@ -12,7 +12,7 @@ public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String adress;
+    private String nationality;
 
     public Student() {
     }
@@ -33,11 +33,11 @@ public class Student {
         this.id = id;
     }
 
-    public String getAdress() {
-        return adress;
+    public String getNationality() {
+        return nationality;
     }
 
-    public void setAdress(String adress) {
-        this.adress = adress;
+    public void setNationality(String nationality) {
+        this.nationality = nationality;
     }
 }

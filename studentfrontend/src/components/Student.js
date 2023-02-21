@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { Container } from '@mui/system';
-import { Paper } from '@mui/material';
+import { Paper, Button } from '@mui/material';
 
 // import { makeStyles } from '@material-ui/core/styles';
 
@@ -18,8 +18,29 @@ import { Paper } from '@mui/material';
 export default function Student() {
     const paperStyle={padding:'50px 20px' , width:600, margin:"20px auto"}
     // const classes = useStyles();
-    const [name, setName] =useState('Ola')
-    const [nationality, setNationality] =useState('PL')
+    const [name, setName] =useState('')
+    const [nationality, setNationality] =useState('')
+    const [students, setStudents]=useState([])
+    const handleClick=(e)=>{
+      e.preventDefault()
+      const student={name, nationality}
+      console.log(student)
+      fetch("http://localhost:8080/student/add", {
+        method:"POST",
+        headers:{"content-Type" : "application/json"},
+        body:JSON.stringify(student)
+      }). then(()=>
+      {console.log("New student added")})
+    }
+useEffect(()=>{
+  fetch("http://localhost:8080/student/all")
+  .then(res=>res.json())
+  .then((result)=>{
+    setStudents(result);
+  }
+)
+},[])
+
   return (
   <Container>
     <Paper elevation={3} style={paperStyle}>
@@ -38,8 +59,34 @@ export default function Student() {
       value={nationality}
       onChange={(e)=>setNationality(e.target.value)}/>
       {/* </form> */}
+      <Button variant="contained" color="secondary"onClick={handleClick}>
+        Submit
+      </Button>
       </Box>
+      {name }
+      {nationality}
+  
+
+</Paper>
+<h1>Students</h1>
+
+<Paper elevation={3} style={paperStyle}>
+
+  {students.map(student=>(
+    <Paper elevation={6} style={{margin:"10px",padding:"15px", textAlign:"left"}} key={student.id}>
+     Id:{student.id}<br/>
+     Name:{student.name}<br/>
+     Nationality:{student.nationality}
+
     </Paper>
-   </Container>
-  );
+  ))
+}
+
+
+</Paper>
+
+
+
+</Container>
+);
 }
