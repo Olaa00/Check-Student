@@ -5,16 +5,7 @@ import TextField from '@mui/material/TextField';
 import { Container } from '@mui/system';
 import { Paper, Button } from '@mui/material';
 
-// import { makeStyles } from '@material-ui/core/styles';
 
-// const useStyles = makeStyles((theme) => ({
-//     root: {
-//       '& > *': {
-//         margin: theme.spacing(1),
-       
-//       },
-//     },
-//   }));
 export default function Student() {
     const paperStyle={padding:'50px 20px' , width:600, margin:"20px auto"}
     // const classes = useStyles();
